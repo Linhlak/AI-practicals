@@ -1,0 +1,8 @@
+% conc(L1, L2, L3)  →  L3 is the result of appending L1 and L2
+
+% Base case: appending an empty list L1 with L2 gives L2
+conc([], L, L).
+
+% Recursive case: take the head H of L1 and append the tail T with L2
+conc([H|T], L2, [H|R]) :-
+    conc(T, L2, R).
