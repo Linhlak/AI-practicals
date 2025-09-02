@@ -1,0 +1,68 @@
+% ---------- FACTS ----------
+
+% gender
+male(john).
+male(mike).
+male(david).
+male(peter).
+male(robert).
+
+female(lisa).
+female(susan).
+female(mary).
+female(karen).
+female(emma).
+
+% parent relationships
+parent(john, mike).
+parent(lisa, mike).
+
+parent(john, mary).
+parent(lisa, mary).
+
+parent(mike, david).
+parent(susan, david).
+
+parent(mike, emma).
+parent(susan, emma).
+
+parent(mary, robert).
+parent(peter, robert).
+
+parent(mary, karen).
+parent(peter, karen).
+
+% ---------- RULES ----------
+
+% father: X is father of Y if X is parent of Y and male
+father(X, Y) :- parent(X, Y), male(X).
+
+% mother: X is mother of Y if X is parent of Y and female
+mother(X, Y) :- parent(X, Y), female(X).
+
+% grandparent: X is grandparent of Y if X is parent of Z and Z is parent of Y
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+% grandfather
+grandfather(X, Y) :- grandparent(X, Y), male(X).
+
+% grandmother
+grandmother(X, Y) :- grandparent(X, Y), female(X).
+
+% sibling: X and Y are siblings if they share a parent and are not the same person
+sibling(X, Y) :- parent(Z, X), parent(Z, Y), X \= Y.
+
+% brother
+brother(X, Y) :- sibling(X, Y), male(X).
+
+% sister
+sister(X, Y) :- sibling(X, Y), female(X).
+
+% uncle: X is uncle of Y if X is male and sibling of Y's parent
+uncle(X, Y) :- parent(Z, Y), brother(X, Z).
+
+% aunt: X is aunt of Y if X is female and sibling of Y's parent
+aunt(X, Y) :- parent(Z, Y), sister(X, Z).
+
+% cousin: X and Y are cousins if their parents are siblings
+cousin(X, Y) :- parent(A, X), parent(B, Y), sibling(A, B).
