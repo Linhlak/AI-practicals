@@ -1,0 +1,15 @@
+10. Write a PROLOG program to implement memb(X, L): to check whether X is a member
+of L or not.
+
+% Base case: X is head of the list
+memb(X, [X|_]).
+
+% Recursive case: check membership in the tail of the list
+memb(X, [_|T]) :-
+    memb(X, T).
+Sample
+?- memb(3, [1, 2, 3, 4]).
+true.
+
+?- memb(5, [1, 2, 3, 4]).
+false.
