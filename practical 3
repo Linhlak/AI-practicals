@@ -1,0 +1,13 @@
+3. Write a PROLOG program to implement reverse(L, R) where List L is original and List
+R is reversed list.
+% Main predicate to reverse a list
+reverse(L, R) :-
+    reverse_acc(L, [], R).
+
+% Helper predicate with accumulator
+reverse_acc([], Acc, Acc).
+reverse_acc([H|T], Acc, R) :-
+    reverse_acc(T, [H|Acc], R).
+Sample
+?- reverse([1,2,3,4], R).
+R = [4,3,2,1].
