@@ -1,0 +1,7 @@
+% sum(X, Y, S) succeeds if S is the sum of X and Y.
+sum(X, Y, S) :-
+    S is X + Y.
+sample
+sum(X, Y, S) defines that S will be the sum of X and Y.
+?- sum(5, 10, S).
+S = 15
